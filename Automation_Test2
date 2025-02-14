@@ -1,0 +1,49 @@
+package DemoTest.Test1;
+
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Automation_Impledge {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\\\\\\\Users\\\\\\\\hp5cd\\\\\\\\chrome driver\\\\\\\\chromedriver-win64\\\\\\\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().window().maximize();
+        try {
+       	 driver.get("https://ecspro-qa.kloudship.com\r\n");
+       	 
+       	 //Step 1=Login
+       	 WebElement email=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='login-email']")));
+       	 email.sendKeys("kloudship.qa.automation@mailinator.com\r\n");
+       	 WebElement password=driver.findElement(By.xpath("//input[@id='login-password']"));
+       	 password.sendKeys("Password1");
+       	 driver.findElement(By.xpath("//button[@id='login-btn']")).click();
+       	 
+       	 //Step 2=click on package types
+       	 WebElement packagetypes=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='text-count-card wordwrap-none']")));
+       	 packagetypes.click();
+       	 
+       	 //Step 3=click on add manually
+       	 WebElement Manually=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//mat-icon[@class='mat-icon notranslate mat-tooltip-trigger material-icons mat-ligature-font mat-icon-no-color'][normalize-space()='add']")));
+       	 Manually.click();
+       	 
+       	 //step 4=deleting the package
+       	 driver.findElement(By.xpath("//mat-card[1]//div[2]//mat-icon[1]")).click();
+       	 driver.findElement(By.xpath("//span[normalize-space()='Delete Package Type']")).click();
+       	 
+       	 //step 5= Logout
+       	 driver.findElement(By.xpath("//mat-icon[normalize-space()='more_vert']")).click();
+         driver.findElement(By.xpath("//button[@class='mat-focus-indicator mat-menu-item ng-tns-c99-1']")).click();
+       }catch(Exception e) {
+    	   e.printStackTrace();
+       }finally {
+    	   System.out.println("Test Case Passed");
+       }
+   }
+}	
